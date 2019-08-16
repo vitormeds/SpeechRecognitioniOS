@@ -53,7 +53,7 @@ class AudioServer: NSObject, SFSpeechRecognizerDelegate {
     var timer : Timer?
     var counter = 0
     
-    @IBAction private func killTimer() {
+     private func killTimer() {
         timer?.invalidate()
         timer = nil
     }
@@ -79,27 +79,14 @@ class AudioServer: NSObject, SFSpeechRecognizerDelegate {
         return audioRecorder
     }
     
-    var isloading = false
-    
-    var start = false
-    
-    
     public func startRecording(completion: @escaping(_ getText: String) -> Void) {
-        if !isloading {
             speechRecognizer = nil
             request = nil
             recognitionTask = nil
             audioEngine = AVAudioEngine()
             speacherText = nil
-            isloading = false
-            start = false
             timer = nil
             counter = 0
-            isloading = true
-            if start {
-                self.audioEngine.inputNode.removeTap(onBus: 0)
-            }
-            start = true
             self.killTimer()
             counter = 0
             timer = Timer.scheduledTimer(timeInterval:1, target:self, selector:#selector(prozessTimer), userInfo: nil, repeats: true)
@@ -128,7 +115,6 @@ class AudioServer: NSObject, SFSpeechRecognizerDelegate {
                     if self.counter >= 5{
                         DispatchQueue.main.async{
                             if(self.speacherText == nil){
-                                self.isloading = false
                                 completion(" ")
                                 return
                             }
@@ -158,7 +144,6 @@ class AudioServer: NSObject, SFSpeechRecognizerDelegate {
                         self.speacherText = recording
                         isFinal = result.isFinal
                         DispatchQueue.main.async {
-                            self.isloading = false
                             completion(recording)
                         }
                     }
@@ -174,14 +159,11 @@ class AudioServer: NSObject, SFSpeechRecognizerDelegate {
                 self.audioEngine.prepare()
                 do {
                     try self.audioEngine.start()
-                    self.isloading = false
                 }
                 catch {
                     debugPrint("Error: \(error)")
-                    self.isloading = false
                 }
             }
-        }
     }
     
     

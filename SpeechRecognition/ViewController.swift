@@ -13,8 +13,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBAction func tapToSpeach(_ sender: Any) {
         verifyMyc { result in
             if result {
                 AudioServer.share.startRecording { text  in
@@ -22,6 +21,10 @@ class ViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     func verifyMyc(onCompletion: @escaping (Bool) -> ()) {
