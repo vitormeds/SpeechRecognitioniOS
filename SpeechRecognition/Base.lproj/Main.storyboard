@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Uzl-S1-Kp7">
-                                <rect key="frame" x="16" y="60" width="414" height="740"/>
+                                <rect key="frame" x="16" y="60" width="382" height="740"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -40,7 +40,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="QgK-9v-4TI" secondAttribute="bottom" constant="16" id="bT8-Ai-43o"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QgK-9v-4TI" secondAttribute="trailing" constant="16" id="bo2-7O-ypg"/>
                             <constraint firstItem="Uzl-S1-Kp7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="sSM-qf-cUe"/>
-                            <constraint firstItem="Uzl-S1-Kp7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="16" id="yk7-kO-hSG"/>
+                            <constraint firstItem="Uzl-S1-Kp7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-16" id="yk7-kO-hSG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
