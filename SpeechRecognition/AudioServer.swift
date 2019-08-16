@@ -25,12 +25,11 @@ class AudioServer: NSObject, SFSpeechRecognizerDelegate {
     }
     
     public func setupSpeech(completion: @escaping(Bool) -> Void){
-        //        micphoneButton.isEnabled = false  //2
-        speechRecognizer?.delegate = self  //3
+        speechRecognizer?.delegate = self 
         
-        SFSpeechRecognizer.requestAuthorization { (authStatus) in  //4
+        SFSpeechRecognizer.requestAuthorization { (authStatus) in
             var isButtonEnabled = false
-            switch authStatus {  //5
+            switch authStatus {
             case .authorized:
                 isButtonEnabled = true
                 
@@ -47,10 +46,7 @@ class AudioServer: NSObject, SFSpeechRecognizerDelegate {
                 print("Speech recognition not yet authorized")
             }
             
-            //            OperationQueue.main.addOperation() {
-            //                self.micphoneButton.isEnabled = isButtonEnabled
             completion(isButtonEnabled)
-            //            }
         }
     }
     
@@ -88,7 +84,7 @@ class AudioServer: NSObject, SFSpeechRecognizerDelegate {
     var start = false
     
     
-    public func startRecording(completion: @escaping(_ isFinal: Bool, _ getText: String) -> Void) {
+    public func startRecording(completion: @escaping(_ getText: String) -> Void) {
         if !isloading {
             speechRecognizer = nil
             request = nil
@@ -111,9 +107,6 @@ class AudioServer: NSObject, SFSpeechRecognizerDelegate {
             DispatchQueue.global(qos: .background).async {
                 debugPrint("\(#function)")
                 
-                
-                
-                
                 let audioSession = AVAudioSession.sharedInstance()
                 
                 do {
@@ -123,10 +116,6 @@ class AudioServer: NSObject, SFSpeechRecognizerDelegate {
                     
                     try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
                     try audioSession.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
-                    
-                    //            try audioSession.setCategory(.playAndRecord, mode: .spokenAudio, options: [.interruptSpokenAudioAndMixWithOthers])
-                    //            try audioSession.setMode(.measurement)
-                    //            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
                     
                 } catch  {
                     debugPrint("Audio session initialization error: \(error.localizedDescription)")
@@ -140,7 +129,7 @@ class AudioServer: NSObject, SFSpeechRecognizerDelegate {
                         DispatchQueue.main.async{
                             if(self.speacherText == nil){
                                 self.isloading = false
-                                completion(true," ")
+                                completion(" ")
                                 return
                             }
                         }
@@ -150,7 +139,6 @@ class AudioServer: NSObject, SFSpeechRecognizerDelegate {
                 self.request = SFSpeechAudioBufferRecognitionRequest()
                 guard let request = self.request else {
                     self.stopRecording()
-                    // self.audioEngine.inputNode.removeTap(onBus: 0)
                     return
                 }
                 request.shouldReportPartialResults = true
@@ -171,7 +159,7 @@ class AudioServer: NSObject, SFSpeechRecognizerDelegate {
                         isFinal = result.isFinal
                         DispatchQueue.main.async {
                             self.isloading = false
-                            completion(isFinal,recording)
+                            completion(recording)
                         }
                     }
                     
@@ -212,7 +200,6 @@ class AudioServer: NSObject, SFSpeechRecognizerDelegate {
     }
     
     func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
-        //        micphoneButton.isEnabled = available
         print("SFSpeechRecognizer, availabilityDidChange available = \(available)")
     }
     
