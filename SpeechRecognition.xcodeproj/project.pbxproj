@@ -102,13 +102,13 @@
 			isa = PBXGroup;
 			children = (
 				F43CB4372306D42E009BA875 /* AppDelegate.swift */,
-				F43CB4392306D42E009BA875 /* ViewController.swift */,
 				F43CB43B2306D42E009BA875 /* Main.storyboard */,
+				F43CB4392306D42E009BA875 /* ViewController.swift */,
+				F43CB4682306D512009BA875 /* AudioServer.swift */,
 				F43CB4412306D430009BA875 /* Assets.xcassets */,
 				F43CB4432306D430009BA875 /* LaunchScreen.storyboard */,
 				F43CB4462306D430009BA875 /* Info.plist */,
 				F43CB43E2306D42E009BA875 /* SpeechRecognition.xcdatamodeld */,
-				F43CB4682306D512009BA875 /* AudioServer.swift */,
 			);
 			path = SpeechRecognition;
 			sourceTree = "<group>";

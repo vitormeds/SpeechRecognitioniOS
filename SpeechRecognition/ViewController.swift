@@ -14,7 +14,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        AudioServer.share.startRecording { isFinal,text  in
+            self.textView.text = text
+        }
     }
 
 
